@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use pxlrbt\FilamentFavicon\FaviconFetchers\FaviconFetcher;
+use pxlrbt\FilamentFavicon\Drivers\FaviconFetcher;
 
 class FetchFaviconJob implements ShouldBeUnique, ShouldQueue
 {

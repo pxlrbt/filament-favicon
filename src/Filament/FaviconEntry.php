@@ -17,7 +17,8 @@ class FaviconEntry extends ImageEntry
         $this
             ->label('Favicon')
             ->square()
-            ->imageSize(32);
+            ->imageSize(32)
+            ->extraImgAttributes(['style' => 'object-fit:contain']);
     }
 
     public function getImageUrl(?string $state = null): ?string

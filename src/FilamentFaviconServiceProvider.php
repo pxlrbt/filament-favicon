@@ -3,7 +3,7 @@
 namespace pxlrbt\FilamentFavicon;
 
 use pxlrbt\FilamentFavicon\Commands\ClearFaviconsCommand;
-use pxlrbt\FilamentFavicon\FaviconFetchers\FaviconFetcher;
+use pxlrbt\FilamentFavicon\Drivers\FaviconFetcher;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -19,8 +19,8 @@ class FilamentFaviconServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
-        app()->bind(FaviconFetcher::class, config('filament-favicon.fetcher'));
+        $this->app->bind(FaviconFetcher::class, config('filament-favicon.driver'));
     }
 }

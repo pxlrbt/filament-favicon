@@ -18,7 +18,8 @@ class FaviconColumn extends ImageColumn
             ->label('')
             ->square()
             ->imageSize(32)
-            ->defaultImageUrl(null);
+            ->defaultImageUrl(null)
+            ->extraImgAttributes(['style' => 'object-fit:contain']);
     }
 
     public function getImageUrl(?string $state = null): ?string

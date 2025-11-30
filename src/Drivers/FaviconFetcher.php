@@ -1,6 +1,6 @@
 <?php
 
-namespace pxlrbt\FilamentFavicon\FaviconFetchers;
+namespace pxlrbt\FilamentFavicon\Drivers;
 
 interface FaviconFetcher
 {

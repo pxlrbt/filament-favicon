@@ -1,10 +1,11 @@
 <?php
 
 use Carbon\CarbonInterval;
-use pxlrbt\FilamentFavicon\FaviconFetchers\DuckDuckGo;
+use pxlrbt\FilamentFavicon\Drivers\DuckDuckGo;
+use pxlrbt\FilamentFavicon\Drivers\IconHorse;
 
 return [
-    'fetcher' => DuckDuckGo::class,
+    'driver' => IconHorse::class,
     'stale_after' => CarbonInterval::week(1),
 
     'storage' => [
