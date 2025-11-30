@@ -90,7 +90,7 @@ This package includes two favicon drivers:
 - Free tier: up to 1,000 lookups per month
 - Paid plans available for higher volumes
 - Class: `\pxlrbt\FilamentFavicon\Drivers\IconHorse::class`
-- 
+
 **DuckDuckGo**
 - Uses DuckDuckGo's search engine index to fetch favicons
 - No rate limits or usage restrictions
