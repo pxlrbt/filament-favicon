@@ -1,7 +1,6 @@
 <?php
 
 use Carbon\CarbonInterval;
-use pxlrbt\FilamentFavicon\Drivers\DuckDuckGo;
 use pxlrbt\FilamentFavicon\Drivers\IconHorse;
 
 return [
