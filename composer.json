@@ -1,0 +1,39 @@
+{
+    "name": "pxlrbt/filament-favicon",
+    "description": "Favicon Column and Entry for Filament",
+    "license": "MIT",
+    "keywords": [
+        "favicon",
+        "filament",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Dennis Koch",
+            "email": "info@pixelarbeit.de"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "filament/filament": "^4.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.10",
+        "orchestra/testbench": "^10.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "pxlrbt\\FilamentFavicon\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\pxlrbt\\FilamentFavicon\\FilamentFaviconServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "pint": "vendor/bin/pint"
+    }
+}
