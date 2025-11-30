@@ -2,8 +2,8 @@
 
 namespace pxlrbt\FilamentFavicon\FaviconFetchers;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Http;
 use pxlrbt\FilamentFavicon\Events\FaviconFetched;
 use pxlrbt\FilamentFavicon\Support\FaviconService;
 

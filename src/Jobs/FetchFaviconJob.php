@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use pxlrbt\FilamentFavicon\FaviconFetchers\FaviconFetcher;
 
-class FetchFaviconJob implements ShouldQueue, ShouldBeUnique
+class FetchFaviconJob implements ShouldBeUnique, ShouldQueue
 {
     use InteractsWithQueue;
     use Queueable;

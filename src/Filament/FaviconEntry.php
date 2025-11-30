@@ -26,6 +26,7 @@ class FaviconEntry extends ImageEntry
 
         return $faviconService->url($state);
     }
+
     public function toEmbeddedHtml(): string
     {
         $state = $this->getState();
