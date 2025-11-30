@@ -68,7 +68,7 @@ Available options:
 ```php
 return [
     // Favicon fetcher service (DuckDuckGo or IconHorse)
-    'fetcher' => \pxlrbt\FilamentFavicon\Support\Fetchers\IconHorse::class,
+    'diver' => \pxlrbt\FilamentFavicon\Drivers\IconHorse::class,
 
     // How long to keep favicons before re-fetching
     'stale_after' => CarbonInterval::week(1),
@@ -81,23 +81,23 @@ return [
 ];
 ```
 
-### Favicon Fetchers
+### Favicon Drivers
 
-This package includes two favicon fetcher services:
+This package includes two favicon drivers:
 
 **IconHorse** (default)
 - Dedicated favicon service with enhanced reliability
 - Free tier: up to 1,000 lookups per month
 - Paid plans available for higher volumes
-- Class: `\pxlrbt\FilamentFavicon\Support\Fetchers\IconHorse::class`
+- Class: `\pxlrbt\FilamentFavicon\Drivers\IconHorse::class`
 - 
 **DuckDuckGo**
 - Uses DuckDuckGo's search engine index to fetch favicons
 - No rate limits or usage restrictions
 - Free and unlimited
-- Class: `\pxlrbt\FilamentFavicon\Support\Fetchers\DuckDuckGo::class`
+- Class: `\pxlrbt\FilamentFavicon\Drivers\DuckDuckGo::class`
 
-To switch fetchers, update the `fetcher` option in your config file.
+To switch drivers, update the `driver` option in your config file.
 
 ### Clear Favicons
 
