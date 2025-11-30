@@ -6,7 +6,5 @@ class FaviconFetched
 {
     public function __construct(
         public string $domain,
-    )
-    {
-    }
+    ) {}
 }
