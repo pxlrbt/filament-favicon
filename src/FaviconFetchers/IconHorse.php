@@ -22,7 +22,7 @@ class IconHorse implements FaviconFetcher
             event(new FaviconFetched($domain));
         } catch (RequestException $exception) {
             if ($exception->response->notFound()) {
-                $faviconService->store("{$domain}.txt", '');
+                $faviconService->store("{$domain}.404", '');
             }
         }
     }

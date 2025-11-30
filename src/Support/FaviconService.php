@@ -39,7 +39,7 @@ class FaviconService
     public function store(string $filename, string $content): void
     {
         $domain = pathinfo($filename, PATHINFO_FILENAME);
-        $allExtensions = ['.svg', '.png', '.ico', '.jpg', '.txt'];
+        $allExtensions = ['.svg', '.png', '.ico', '.jpg', '.404'];
 
         foreach ($allExtensions as $extension) {
             $oldFile = $this->directory().$domain.$extension;
@@ -58,9 +58,13 @@ class FaviconService
             return null;
         }
 
-        $domain = Uri::of($state)->host();
+        $domain = $state;
 
-        $filename = $this->directory().$domain.'.txt';
+        if ($domain === null) {
+            return null;
+        }
+
+        $filename = $this->directory().$domain.'.404';
 
         if ($this->storage()->exists($filename)) {
             $lastModified = $this->storage()->lastModified($filename);

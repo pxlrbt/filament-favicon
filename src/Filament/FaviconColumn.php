@@ -15,11 +15,9 @@ class FaviconColumn extends ImageColumn
     protected function setUp(): void
     {
         $this
-            ->label('Favicon')
-            ->disk(config('filament-favicon.storage.disk', 'public'))
+            ->label('')
             ->square()
             ->imageSize(32)
-            ->extraImgAttributes(['style' => 'object-fit: contain'])
             ->defaultImageUrl(null);
     }
 

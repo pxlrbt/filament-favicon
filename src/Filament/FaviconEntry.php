@@ -2,10 +2,10 @@
 
 namespace pxlrbt\FilamentFavicon\Filament;
 
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Infolists\Components\ImageEntry;
 use pxlrbt\FilamentFavicon\Support\FaviconService;
 
-class FaviconEntry extends ImageColumn
+class FaviconEntry extends ImageEntry
 {
     public static function getDefaultName(): ?string
     {
@@ -16,10 +16,25 @@ class FaviconEntry extends ImageColumn
     {
         $this
             ->label('Favicon')
-            ->disk('public')
             ->square()
-            ->imageSize(32)
-            ->extraImgAttributes(['style' => 'object-fit: contain'])
-            ->url(fn ($state, FaviconService $iconService) => $iconService->url($state));
+            ->imageSize(32);
+    }
+
+    public function getImageUrl(?string $state = null): ?string
+    {
+        $faviconService = resolve(FaviconService::class);
+
+        return $faviconService->url($state);
+    }
+    public function toEmbeddedHtml(): string
+    {
+        $state = $this->getState();
+        $imageUrl = $this->getImageUrl($state);
+
+        if (blank($imageUrl)) {
+            return '';
+        }
+
+        return parent::toEmbeddedHtml();
     }
 }
