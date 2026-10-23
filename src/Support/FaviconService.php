@@ -7,6 +7,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use pxlrbt\FilamentFavicon\Jobs\FetchFaviconJob;
+use RuntimeException;
 
 class FaviconService
 {
@@ -26,21 +27,23 @@ class FaviconService
         return rtrim(config('filament-favicon.storage.directory', 'favicons'), '/').'/';
     }
 
-    protected function isStale(string $filename): bool
+    protected function isStale(string $filename, CarbonInterval $staleInterval): bool
     {
         $lastModified = $this->storage()->lastModified($filename);
-        $staleInterval = config('filament-favicon.stale_after', CarbonInterval::week(1));
         $staleDate = Carbon::createFromTimestamp($lastModified)->addSeconds($staleInterval->totalSeconds);
 
         return $staleDate->isPast();
     }
 
+    /**
+     * Empty files are leftovers of failed fetches and count as missing.
+     */
     protected function findFaviconFile(string $domain): ?string
     {
         foreach (self::FAVICON_EXTENSIONS as $extension) {
             $filename = $this->directory().$domain.$extension;
 
-            if ($this->storage()->exists($filename)) {
+            if ($this->storage()->exists($filename) && $this->storage()->size($filename) > 0) {
                 return $filename;
             }
         }
@@ -80,7 +83,11 @@ class FaviconService
 
         $this->pruneOldFiles($domain);
 
-        $this->storage()->put($this->directory().$filename, $content);
+        $path = $this->directory().$filename;
+
+        if (! $this->storage()->put($path, $content)) {
+            throw new RuntimeException("Could not write favicon to [{$path}].");
+        }
     }
 
     public function url(?string $domain): ?string
@@ -93,7 +100,7 @@ class FaviconService
         $notFoundFile = $this->directory().$domain.self::NOT_FOUND_EXTENSION;
 
         if ($storage->exists($notFoundFile)) {
-            if ($this->isStale($notFoundFile)) {
+            if ($this->isStale($notFoundFile, config('filament-favicon.not_found_stale_after', CarbonInterval::day(1)))) {
                 dispatch(new FetchFaviconJob($domain));
             }
 
@@ -103,7 +110,7 @@ class FaviconService
         $faviconFile = $this->findFaviconFile($domain);
 
         if ($faviconFile !== null) {
-            if ($this->isStale($faviconFile)) {
+            if ($this->isStale($faviconFile, config('filament-favicon.stale_after', CarbonInterval::week(1)))) {
                 dispatch(new FetchFaviconJob($domain));
             }
 

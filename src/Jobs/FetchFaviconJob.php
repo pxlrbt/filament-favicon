@@ -15,6 +15,11 @@ class FetchFaviconJob implements ShouldBeUnique, ShouldQueue
 
     public int $tries = 1;
 
+    /**
+     * Releases the lock of a job that never ran, so the domain is fetched again.
+     */
+    public int $uniqueFor = 3600;
+
     public function __construct(
         protected string $domain,
     ) {}

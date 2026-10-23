@@ -73,6 +73,9 @@ return [
     // How long to keep favicons before re-fetching
     'stale_after' => CarbonInterval::week(1),
 
+    // How long to wait before retrying domains the driver found no favicon for
+    'not_found_stale_after' => CarbonInterval::day(1),
+
     // Storage configuration
     'storage' => [
         'disk' => 'public',
