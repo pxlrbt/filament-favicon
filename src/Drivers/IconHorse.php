@@ -23,7 +23,11 @@ class IconHorse implements FaviconFetcher
         } catch (RequestException $exception) {
             if ($exception->response->notFound()) {
                 $faviconService->store("{$domain}.404", '');
+
+                return;
             }
+
+            throw $exception;
         }
     }
 }
